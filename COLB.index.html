@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Regional Bank Comparison: Columbia vs. Western Alliance</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f7f9fb;
+            color: #1f2937;
+        }
+        .comparison-card {
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+        }
+        .comparison-card:hover {
+            transform: translateY(-5px);
+        }
+        .header-cell {
+            background-color: #1f2937; /* Dark gray for header */
+            color: white;
+            font-weight: 700;
+        }
+        .data-row:nth-child(even) {
+            background-color: #f3f4f6;
+        }
+        .data-row:nth-child(odd) {
+            background-color: #ffffff;
+        }
+        .bank-col-colb {
+            background-color: #edf2f7; /* Light blue/gray for Columbia */
+            color: #1f2937;
+        }
+        .bank-col-wal {
+            background-color: #e5e7eb; /* Slightly darker gray for Western Alliance */
+            color: #1f2937;
+        }
+    </style>
+</head>
+<body class="p-4 md:p-8">
+
+    <div class="max-w-6xl mx-auto">
+        <h1 class="text-3xl md:text-4xl font-bold mb-6 text-center text-gray-800">
+            Regional Bank Deep Dive: Columbia Bank vs. Western Alliance Bank
+        </h1>
+        <p class="text-center text-lg text-gray-600 mb-10">
+            A detailed comparison of two major U.S. regional banks based on key financial and operational metrics.
+        </p>
+
+        <!-- Comparison Table Container -->
+        <div id="comparison-table" class="comparison-card bg-white rounded-xl overflow-hidden">
+            <!-- Table Header -->
+            <div class="grid grid-cols-3 text-center text-sm md:text-base">
+                <div class="header-cell p-3 border-r border-gray-700">Category</div>
+                <div class="header-cell p-3 border-r border-gray-700">Columbia Bank (COLB)</div>
+                <div class="header-cell p-3">Western Alliance Bank (WAL)</div>
+            </div>
+
+            <!-- Table Rows will be rendered here by JavaScript -->
+        </div>
+    </div>
+
+    <script>
+        // Data synthesized from the search results
+        const comparisonData = {
+            "Establishment & Background": {
+                "Founded Year": {
+                    colb: "1993 (Columbia State Bank)",
+                    wal: "1994 (Western Alliance Bancorporation)"
+                },
+                "Headquarters": {
+                    colb: "Tacoma, Washington",
+                    wal: "Phoenix, Arizona"
+                },
+                "Stock Exchange": {
+                    colb: "NASDAQ: COLB",
+                    wal: "NYSE: WAL"
+                },
+            },
+            "Asset Size (Approximate)": {
+                "Total Assets": {
+                    colb: "~$70 Billion (Post-Pacific Premier Merger)",
+                    wal: "~$85 Billion",
+                    note: "Asset figures are approximate and subject to change based on the most recent quarterly reports and completed M&A activity."
+                },
+            },
+            "Geographical Presence": {
+                "Core Footprint": {
+                    colb: "8 Western States (WA, OR, CA, ID, AZ, CO, NV, UT)",
+                    wal: "National Commercial Bank with regional presence in AZ, CA, NV, TX, GA, NY, IL, etc."
+                },
+                "Branch Focus": {
+                    colb: "Strong local roots across the Northwest and West Coast.",
+                    wal: "National commercial business lines, supported by a regional branch footprint."
+                }
+            },
+            "Recent M&A Activity (Key)": {
+                "Major Acquisitions": {
+                    colb: "Pacific Premier Bancorp (2025), Umpqua Holdings Corporation (2023), Bank of Commerce Holdings (2021).",
+                    wal: "AmeriHome Mortgage Co. (2021), Bridge Capital Holdings (2015).",
+                },
+                "Brand Strategy": {
+                    colb: "Unified brand: Columbia Bank (completed transition from Umpqua Bank name in 2025).",
+                    wal: "Unifying divisions (Bridge Bank, etc.) under the single Western Alliance Bank brand (in progress/recently completed)."
+                }
+            },
+            "Core Offerings & Specialization": {
+                "Core Products": {
+                    colb: "Retail & Commercial Banking, Wealth Management, Treasury Management, SBA Lending.",
+                    wal: "Commercial Checking/Savings, Treasury Management, Specialized Credit/Lending, Asset-Based Lending, Private Client Services."
+                },
+                "Core Lending Areas": {
+                    colb: "Commercial Real Estate (CRE), Small Business Loans, Equipment Financing, Middle Market Lending.",
+                    wal: "Commercial Real Estate & Construction, Lender Finance, Mortgage Warehouse Lending (Specialized Mortgage Services), Innovation Banking (Tech/Life Sciences)."
+                }
+            },
+            "Primary Focus / Business Model": {
+                "Core Strategy": {
+                    colb: "Regional Banking Leader in the West. Focus on retail, commercial banking, SBA lending, and wealth management.",
+                    wal: "National Commercial Bank Strategy. Highly specialized banking verticals, including Innovation Banking, HOA Banking, and Mortgage Banking.",
+                },
+                "Specialized Business": {
+                    colb: "Wealth Management, Equipment Leasing, Private Banking.",
+                    wal: "Innovation Banking (Tech/Life Sciences), HOA Banking, AmeriHome Mortgage, Juris Banking (Legal).",
+                }
+            }
+        };
+
+        const tableContainer = document.getElementById('comparison-table');
+
+        // Function to render the comparison table
+        function renderComparisonTable() {
+            // Clear existing content except the static header row
+            while (tableContainer.children.length > 1) {
+                tableContainer.removeChild(tableContainer.lastChild);
+            }
+
+            for (const section in comparisonData) {
+                // Render Section Title
+                const sectionHeader = document.createElement('div');
+                sectionHeader.className = 'col-span-3 bg-blue-900 text-white font-bold p-3 text-left text-lg border-b border-gray-700';
+                sectionHeader.textContent = section;
+                tableContainer.appendChild(sectionHeader);
+
+                for (const criteria in comparisonData[section]) {
+                    const data = comparisonData[section][criteria];
+                    
+                    // Create main data row
+                    const row = document.createElement('div');
+                    row.className = 'grid grid-cols-3 text-sm md:text-base data-row';
+
+                    // Criteria column
+                    const criteriaCell = document.createElement('div');
+                    criteriaCell.className = 'p-3 text-left font-semibold border-r border-gray-300';
+                    criteriaCell.textContent = criteria;
+                    row.appendChild(criteriaCell);
+
+                    // Columbia Bank data column
+                    const colbCell = document.createElement('div');
+                    colbCell.className = 'p-3 text-center border-r border-gray-300 bank-col-colb';
+                    colbCell.textContent = data.colb || 'N/A';
+                    row.appendChild(colbCell);
+
+                    // Western Alliance Bank data column
+                    const walCell = document.createElement('div');
+                    walCell.className = 'p-3 text-center bank-col-wal';
+                    walCell.textContent = data.wal || 'N/A';
+                    row.appendChild(walCell);
+
+                    tableContainer.appendChild(row);
+
+                    // If a note exists, add an extra row for clarification
+                    if (data.note) {
+                        const noteRow = document.createElement('div');
+                        noteRow.className = 'col-span-3 bg-yellow-50 text-gray-700 text-xs italic p-2 text-center border-t border-b border-yellow-200';
+                        noteRow.textContent = `*Note: ${data.note}`;
+                        tableContainer.appendChild(noteRow);
+                    }
+                }
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', renderComparisonTable);
+    </script>
+</body>
+</html>
